@@ -4,8 +4,16 @@ import torch
 import torch.nn as nn
 import numpy as np
 from preprocessing import prepare_signal
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, replace "*" with your frontend URL
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Architecture MUST match train_1dcnn.py exactly
 class MobileVitalNet(nn.Module):
